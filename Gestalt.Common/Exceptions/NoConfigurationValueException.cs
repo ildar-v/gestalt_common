@@ -1,0 +1,15 @@
+﻿namespace Gestalt.Common.Exceptions
+{
+    using System;
+
+    /// <summary>
+    /// Класс исключения при ненайденных значениях конфигурации.
+    /// </summary>
+    public class NoConfigurationValueException : Exception
+    {
+        public NoConfigurationValueException(string key)
+            : base($"Value by key '{key}' not found.")
+        {
+        }
+    }
+}
