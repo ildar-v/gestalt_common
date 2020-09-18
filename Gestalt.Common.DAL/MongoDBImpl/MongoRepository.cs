@@ -1,6 +1,7 @@
 namespace Gestalt.Common.DAL.MongoDBImpl
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Gestalt.Common.DAL.MongoDBImpl
     {
         private readonly IMongoCollection<T> _collection;
 
-        public MongoRepository(MongoSettings settings)
+        public MongoRepository(MongoSettings<T> settings)
         {
             Console.WriteLine("Trying to connect mongo...");
             var client = new MongoClient(settings.ConnectionString);
@@ -22,7 +23,7 @@ namespace Gestalt.Common.DAL.MongoDBImpl
         }
 
         public async Task<T> GetAsync(string id)
-            => await GetAsync(e => e.Id == id);
+            => await GetAsync(e => e.MyId.ToString() == id);
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
             => await _collection.Find(predicate).FirstOrDefaultAsync();
@@ -36,6 +37,9 @@ namespace Gestalt.Common.DAL.MongoDBImpl
         public async Task AddAsync(T entity)
             => await _collection.InsertOneAsync(entity);
 
+        public async Task AddManyAsync(IEnumerable<T> entities)
+            => await _collection.InsertManyAsync(entities);
+
         public async Task AddAsync(IEnumerable<T> entity)
             => await _collection.InsertManyAsync(entity);
 
@@ -43,7 +47,7 @@ namespace Gestalt.Common.DAL.MongoDBImpl
             => await _collection.Find(predicate).AnyAsync();
 
         public async Task UpdateAsync(T agreement)
-            => await _collection.ReplaceOneAsync(a => a.Id == agreement.Id, agreement);
+            => await _collection.ReplaceOneAsync(a => a.MyId == agreement.MyId, agreement);
 
         public async Task DropCollection()
             => await _collection.Database.DropCollectionAsync(_collection.CollectionNamespace.CollectionName);

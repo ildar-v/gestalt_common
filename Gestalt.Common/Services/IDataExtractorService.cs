@@ -5,6 +5,7 @@
     public interface IDataExtractorService
     {
         Task WriteToFileFromApi();
+
         Task ReadFromFile();
     }
 }

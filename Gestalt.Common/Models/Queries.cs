@@ -1,10 +1,11 @@
 ﻿﻿namespace Gestalt.Common.Models
 {
-    using System.Text.Json.Serialization;
+    using Newtonsoft.Json;
 
     public class Queries
     {
-        public long id { get; set; } // "3306877"
+        [JsonProperty("id")]
+        public long SystemId { get; set; } // "3306877"
 
         public string message { get; set; } //"Около 3 подъезда дома по улице Бондаренко, 29 огромная лужа. Невозможно пройти ни пожилым людям, ни мамам с колясками и детьми. Необходимо прочистить ливневку и убрать талый снег."
 
@@ -25,7 +26,8 @@
         public string author_type { get; set; } // "1","
         public string lat { get; set; } // "55.821724200000","
 
-        [JsonPropertyName("long")] public string _long { get; set; } // "49.103201700000","
+        [JsonProperty("long")]
+        public string _long { get; set; } // "49.103201700000","
         public string status { get; set; } // "2","
         public string state { get; set; } // null,"
         public string university_id { get; set; } // "0","

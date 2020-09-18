@@ -5,7 +5,7 @@
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
 
-    public class MainResponseEntity : MainResponse, IIdentifiable
+    public class QueryEntity : Queries, IIdentifiable
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
