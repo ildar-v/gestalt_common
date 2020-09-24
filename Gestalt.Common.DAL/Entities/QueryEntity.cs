@@ -9,6 +9,6 @@
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId MyId { get; set; }
+        public ObjectId EntityId { get; set; }
     }
 }

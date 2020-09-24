@@ -20,10 +20,16 @@ namespace Gestalt.Common.DAL.MongoDBImpl
             Console.WriteLine("Database getted.");
             _collection = database.GetCollection<T>(settings.CollectionName);
             Console.WriteLine("Collection getted.");
+
+            // var xxx = new CreateIndexModel<T>(new JsonIndexKeysDefinition<T>("EmailAddress"));
+            // var options = new CreateIndexOptions() { Unique = true };
+            // var field = new StringFieldDefinition<T>("EmailAddress");
+            // var indexDefinition = new IndexKeysDefinitionBuilder<T>().Ascending(field);
+            // _collection.Indexes.CreateOne(indexDefinition, options);
         }
 
         public async Task<T> GetAsync(string id)
-            => await GetAsync(e => e.MyId.ToString() == id);
+            => await GetAsync(e => e.EntityId.ToString() == id);
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
             => await _collection.Find(predicate).FirstOrDefaultAsync();
@@ -47,7 +53,7 @@ namespace Gestalt.Common.DAL.MongoDBImpl
             => await _collection.Find(predicate).AnyAsync();
 
         public async Task UpdateAsync(T agreement)
-            => await _collection.ReplaceOneAsync(a => a.MyId == agreement.MyId, agreement);
+            => await _collection.ReplaceOneAsync(a => a.EntityId == agreement.EntityId, agreement);
 
         public async Task DropCollection()
             => await _collection.Database.DropCollectionAsync(_collection.CollectionNamespace.CollectionName);

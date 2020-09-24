@@ -7,6 +7,6 @@ namespace Gestalt.Common.DAL.MongoDBImpl
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        ObjectId MyId { get; set; }
+        ObjectId EntityId { get; set; }
     }
 }

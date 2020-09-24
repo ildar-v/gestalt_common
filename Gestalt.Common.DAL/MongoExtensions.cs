@@ -64,14 +64,14 @@
             return services;
         }
 
-        public static TEntity GetEntity<TEntity, T>(this T model) where TEntity : T, IIdentifiable, new()
+        public static TEntity ToEntity<TEntity, T>(this T model) where TEntity : T, IIdentifiable, new()
         {
             var entity = new TEntity();
             JsonConvert.PopulateObject(JsonConvert.SerializeObject(model), entity);
             return entity;
         }
 
-        public static IEnumerable<TEntity> GetEntities<TEntity, T>(this IEnumerable<T> models)
+        public static IEnumerable<TEntity> ToEntities<TEntity, T>(this IEnumerable<T> models)
             where TEntity : T, IIdentifiable, new()
         {
             var entities = new List<TEntity>();

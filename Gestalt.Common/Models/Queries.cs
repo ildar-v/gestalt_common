@@ -5,7 +5,7 @@
     public class Queries
     {
         [JsonProperty("id")]
-        public long SystemId { get; set; } // "3306877"
+        public long RequestId { get; set; } // "3306877"
 
         public string message { get; set; } //"Около 3 подъезда дома по улице Бондаренко, 29 огромная лужа. Невозможно пройти ни пожилым людям, ни мамам с колясками и детьми. Необходимо прочистить ливневку и убрать талый снег."
 
