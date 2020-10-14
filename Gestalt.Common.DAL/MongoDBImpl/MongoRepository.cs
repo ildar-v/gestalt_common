@@ -1,25 +1,25 @@
+using System;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using MongoDB.Driver;
+
 namespace Gestalt.Common.DAL.MongoDBImpl
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-    using MongoDB.Driver;
-
     public class MongoRepository<T> : IMongoRepository<T> where T : IIdentifiable
     {
         private readonly IMongoCollection<T> _collection;
 
-        public MongoRepository(MongoSettings<T> settings)
+        public MongoRepository(MongoSettings<T> settings, ILogger<MongoRepository<T>> logger)
         {
-            Console.WriteLine("Trying to connect mongo...");
+            logger.LogInformation("Trying to connect mongo...");
             var client = new MongoClient(settings.ConnectionString);
-            Console.WriteLine("Client created.");
+            logger.LogInformation("Client created.");
             var database = client.GetDatabase(settings.DatabaseName);
-            Console.WriteLine("Database getted.");
+            logger.LogInformation("Database getted.");
             _collection = database.GetCollection<T>(settings.CollectionName);
-            Console.WriteLine("Collection getted.");
+            logger.LogInformation("Collection getted.");
 
             // var xxx = new CreateIndexModel<T>(new JsonIndexKeysDefinition<T>("EmailAddress"));
             // var options = new CreateIndexOptions() { Unique = true };

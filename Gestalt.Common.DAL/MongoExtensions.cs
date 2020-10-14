@@ -1,15 +1,13 @@
-﻿namespace Gestalt.Common.DAL
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using Gestalt.Common.DAL.Entities;
-    using Gestalt.Common.DAL.MongoDBImpl;
-    using Gestalt.Common.Models;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Gestalt.Common.DAL.Entities;
+using Gestalt.Common.DAL.MongoDBImpl;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
+namespace Gestalt.Common.DAL
+{
     public static class MongoExtension
     {
         public static IServiceCollection AddMongo(this IServiceCollection services, IConfiguration configuration)
@@ -36,31 +34,31 @@
                 ?? "root";
             var url = $"mongodb://{username}:{password}@{imageName}:{port}";
 
-            var requestsCollectionName =
-                configuration["Environment:REQUESTS_COLLECTION_NAME"]
-                ?? Environment.GetEnvironmentVariable("REQUESTS_COLLECTION_NAME")
-                ?? "requests";
-            var requestsMongoSettings = new MongoSettings<MainResponseEntity>()
+            var requestListCollectionName =
+                configuration["Environment:REQUESTLIST_COLLECTION_NAME"]
+                ?? Environment.GetEnvironmentVariable("REQUESTLIST_COLLECTION_NAME")
+                ?? "requestlist";
+            var requestListMongoSettings = new MongoSettings<RequestListEntity>()
             {
                 ConnectionString = url,
-                CollectionName = requestsCollectionName,
+                CollectionName = requestListCollectionName,
                 DatabaseName = databaseName
             };
-            services.AddSingleton(requestsMongoSettings);
-            services.AddSingleton<IMongoRepository<MainResponseEntity>, MongoRepository<MainResponseEntity>>();
+            services.AddSingleton(requestListMongoSettings);
+            services.AddSingleton<IMongoRepository<RequestListEntity>, MongoRepository<RequestListEntity>>();
 
-            var queriesCollectionName =
-                configuration["Environment:QUERIES_COLLECTION_NAME"]
-                ?? Environment.GetEnvironmentVariable("QUERIES_COLLECTION_NAME")
-                ?? "requests";
-            var queriesSettings = new MongoSettings<QueryEntity>()
+            var requestCollectionName =
+                configuration["Environment:REQUEST_COLLECTION_NAME"]
+                ?? Environment.GetEnvironmentVariable("REQUEST_COLLECTION_NAME")
+                ?? "request";
+            var requestMongoSettings = new MongoSettings<RequestEntity>()
             {
                 ConnectionString = url,
-                CollectionName = queriesCollectionName,
+                CollectionName = requestCollectionName,
                 DatabaseName = databaseName
             };
-            services.AddSingleton(queriesSettings);
-            services.AddSingleton<IMongoRepository<QueryEntity>, MongoRepository<QueryEntity>>();
+            services.AddSingleton(requestMongoSettings);
+            services.AddSingleton<IMongoRepository<RequestEntity>, MongoRepository<RequestEntity>>();
             return services;
         }
 

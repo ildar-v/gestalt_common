@@ -1,13 +1,14 @@
-﻿﻿namespace Gestalt.Common.Models
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-    public class Queries
+namespace Gestalt.Common.Models
+{
+    public class Request
     {
         [JsonProperty("id")]
         public long RequestId { get; set; } // "3306877"
 
-        public string message { get; set; } //"Около 3 подъезда дома по улице Бондаренко, 29 огромная лужа. Невозможно пройти ни пожилым людям, ни мамам с колясками и детьми. Необходимо прочистить ливневку и убрать талый снег."
+        //"Около 3 подъезда дома по улице Бондаренко, 29 огромная лужа. Невозможно пройти ни пожилым людям, ни мамам с колясками и детьми. Необходимо прочистить ливневку и убрать талый снег."
+        public string message { get; set; }
 
         public long minecology_user_id { get; set; } // "12948142",
         public string minecology_message_id { get; set; } // null,"
@@ -28,6 +29,7 @@
 
         [JsonProperty("long")]
         public string _long { get; set; } // "49.103201700000","
+
         public string status { get; set; } // "2","
         public string state { get; set; } // null,"
         public string university_id { get; set; } // "0","
@@ -57,13 +59,7 @@
         public string is_esia_authorized { get; set; } // "0","
 
         public PhotoModel[] photos { get; set; }
-        
-        // public string[] photos { get; set; } //{
-        // 	"photo{ get; set; } // "3306877-1-0.7053819239616512.jpg",
-        // 	"small_photo{ get; set; } // "small-3306877-1-0.7053819239616512.jpg",
-        // 	"medium_photo{ get; set; } // "medium-3306877-1-0.7053819239616512.jpg",
-        // 	"original_photo{ get; set; } // "original-3306877-1-0.7053819239616512.jpg"
-        // };
+
         public string small_photo { get; set; } // "small-3306877-1-0.7053819239616512.jpg","
         public string medium_photo { get; set; } // "medium-3306877-1-0.7053819239616512.jpg","
         public string category_name { get; set; } // "Благоустройство территории","

@@ -1,7 +1,7 @@
-﻿namespace Gestalt.Common.Exceptions
-{
-    using System;
+﻿using System;
 
+namespace Gestalt.Common.Exceptions
+{
     /// <summary>
     /// Класс исключения при ненайденных значениях конфигурации.
     /// </summary>

@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
 namespace Gestalt.Common.DAL.MongoDBImpl
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-
     public interface IMongoRepository<T> where T : IIdentifiable
     {
         Task<T> GetAsync(string id);

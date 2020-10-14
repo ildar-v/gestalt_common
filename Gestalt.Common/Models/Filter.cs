@@ -1,16 +1,6 @@
-﻿﻿namespace Gestalt.Common.Models
+﻿namespace Gestalt.Common.Models
 {
-    public class MainResponse
-    {
-        public string count { get; set; }
-        public string count_text { get; set; }
-        public string max_id { get; set; }
-
-        public ResultFilter filter { get; set; }
-        public Queries[] requests { get; set; }
-    }
-
-    public class ResultFilter
+    public class Filter
     {
         public string sorting_filter { get; set; }
         public string categories_filter { get; set; }
